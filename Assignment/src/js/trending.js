@@ -54,4 +54,4 @@ function ProductCard(product) {
       `;
 	} };
 }
-export { Trend as default };
+export { ProductCard, Trend as default };

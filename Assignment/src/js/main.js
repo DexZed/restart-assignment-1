@@ -1,8 +1,8 @@
 /* empty css           */
 import Footer from "./footer.js";
 import Navbar from "./navbar.js";
-import router from "./router/routes.js";
 import { AppStore } from "./store/store.js";
+import router from "./router/routes.js";
 function buildUi() {
 	const app = document.querySelector("#app");
 	const components = [

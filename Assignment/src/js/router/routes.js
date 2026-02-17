@@ -1,5 +1,6 @@
 import { html } from "../utils.js";
 import Home from "../home.js";
+import Products from "../products.js";
 var routes = [
 	{
 		path: "/",
@@ -7,15 +8,7 @@ var routes = [
 	},
 	{
 		path: "/products",
-		view: () => ({ render: () => {
-			const template = document.createElement("template");
-			template.innerHTML = `
-        <section class="hero">
-         Products Page
-        </section>
-      `.trim();
-			return template.content.firstElementChild;
-		} })
+		view: () => Products()
 	},
 	{
 		path: "/products/:id",
