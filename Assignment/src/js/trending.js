@@ -2,15 +2,17 @@ import { html, openModal } from "./utils.js";
 import { getProducts } from "./api/api.js";
 function Trend() {
 	return { render() {
-		const container = html`<section id="trend-section">
+		const container = html`<section id="trend-section" >
         <h2 class="text-3xl font-bold m-10 text-center md:text-left">Trending Now</h2>
         <div class="loader">Loading products...</div> 
       </section>`;
 		getProducts().then((data) => {
 			const grid = html`
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10 place-items-center">
+          
+          <div class="flex flex-col sm:flex-wrap sm:flex-row  lg:flex-wrap lg:flex-row justify-center gap-4 m-10 ">
             ${data.sort((a, b) => b.rating.rate - a.rating.rate).slice(0, 3).map((p) => ProductCard(p).render())}
           </div>
+          
         `;
 			container.querySelector(".loader")?.replaceWith(grid);
 		});
