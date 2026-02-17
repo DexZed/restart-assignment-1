@@ -1,16 +1,5 @@
+import { html } from "../utils.js";
 var routes = [
-	{
-		path: "/error",
-		view: () => ({ render: () => {
-			const template = document.createElement("template");
-			template.innerHTML = `
-        <section class="hero">
-          Error Page
-        </section>
-      `.trim();
-			return template.content.firstElementChild;
-		} })
-	},
 	{
 		path: "/",
 		view: () => ({ render: () => {
@@ -30,6 +19,18 @@ var routes = [
 			template.innerHTML = `
         <section class="hero">
          Products Page
+        </section>
+      `.trim();
+			return template.content.firstElementChild;
+		} })
+	},
+	{
+		path: "/products/:id",
+		view: (params) => ({ render: () => {
+			const template = document.createElement("template");
+			template.innerHTML = `
+        <section class="hero">
+         Products Page Id: ${params?.[0]} 
         </section>
       `.trim();
 			return template.content.firstElementChild;
@@ -60,8 +61,24 @@ var routes = [
 		} })
 	}
 ];
+function getRouteParams(routePath) {
+	const currentPath = location.pathname;
+	const regex = new RegExp("^" + routePath.replace(/:[^\s/]+/g, "([^/]+)") + "$");
+	const match = currentPath.match(regex);
+	if (match) return match.slice(1);
+	return null;
+}
 function router() {
-	const match = routes.find((r) => location.pathname === r.path);
-	return match ? match.view() : routes[0].view();
+	for (const route of routes) {
+		const params = getRouteParams(route.path);
+		if (params) return route.view(params);
+	}
+	return { render: () => {
+		return html`
+        <section class="hero">
+          Error Page
+        </section>
+      `;
+	} };
 }
 export { router as default };

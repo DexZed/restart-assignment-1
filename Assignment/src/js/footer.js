@@ -1,7 +1,7 @@
+import { html } from "./utils.js";
 function Footer() {
 	return { render() {
-		const template = document.createElement("template");
-		template.innerHTML = `
+		return html`
         <section>
           <footer
             class="footer sm:footer-horizontal bg-base-200 text-base-content p-10"
@@ -103,8 +103,7 @@ function Footer() {
             </nav>
           </footer>
         </section>
-    `.trim();
-		return template.content.firstElementChild;
+    `;
 	} };
 }
 export { Footer as default };

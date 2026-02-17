@@ -1,3 +1,4 @@
+import { html } from "./utils.js";
 import logo_default from "../../public/logo.js";
 function Navbar() {
 	const links = `
@@ -8,8 +9,7 @@ function Navbar() {
         <li><a href="/contact" data-link>Contact</a></li>
   `;
 	return { render() {
-		const template = document.createElement("template");
-		template.innerHTML = `
+		return html`
     <section>
       <div class="navbar bg-base-100 shadow-sm">
         <div class="navbar-start">
@@ -57,8 +57,7 @@ function Navbar() {
         </div>
       </div>
     </section>
-    `.trim();
-		return template.content.firstElementChild;
+    `;
 	} };
 }
 export { Navbar as default };
