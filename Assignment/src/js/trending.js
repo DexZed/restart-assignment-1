@@ -8,7 +8,7 @@ function Trend() {
       </section>`;
 		getProducts().then((data) => {
 			const grid = html`
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-10 place-items-center">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10 place-items-center">
             ${data.sort((a, b) => b.rating.rate - a.rating.rate).slice(0, 3).map((p) => ProductCard(p).render())}
           </div>
         `;
