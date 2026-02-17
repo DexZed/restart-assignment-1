@@ -1,16 +1,9 @@
 import { html } from "../utils.js";
+import Home from "../home.js";
 var routes = [
 	{
 		path: "/",
-		view: () => ({ render: () => {
-			const template = document.createElement("template");
-			template.innerHTML = `
-        <section class="hero">
-          Home Page
-        </section>
-      `.trim();
-			return template.content.firstElementChild;
-		} })
+		view: () => Home()
 	},
 	{
 		path: "/products",

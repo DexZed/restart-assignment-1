@@ -1,6 +1,8 @@
+import { html } from "./utils.js";
 import banner_image_default from "../../public/banner-image.js";
 function Hero() {
-	return { render: () => `
+	return { render() {
+		return html`
     <section>
       <div
         class="hero min-h-screen"
@@ -21,6 +23,7 @@ function Hero() {
         </div>
       </div>
     </section>
-` };
+`;
+	} };
 }
 export { Hero as default };
