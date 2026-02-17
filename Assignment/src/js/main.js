@@ -1,16 +1,28 @@
 /* empty css           */
 import Footer from "./footer.js";
-import Hero from "./hero.js";
 import Navbar from "./navbar.js";
-function buildUi(ui) {
-	document.querySelector("#app").replaceChildren(...ui.map((section) => {
-		const el = document.createElement("div");
-		el.innerHTML = section.render();
-		return el.firstElementChild;
-	}));
+import router from "./router/routes.js";
+function buildUi() {
+	const app = document.querySelector("#app");
+	const components = [
+		Navbar().render(),
+		router().render(),
+		Footer().render()
+	];
+	app.replaceChildren(...components);
 }
-buildUi([
-	Navbar(),
-	Hero(),
-	Footer()
-]);
+function Main() {
+	window.addEventListener("popstate", buildUi);
+	document.addEventListener("DOMContentLoaded", () => {
+		buildUi();
+		document.body.addEventListener("click", (e) => {
+			const link = e.target.closest("a");
+			if (link && link.getAttribute("href")?.startsWith("/")) {
+				e.preventDefault();
+				history.pushState(null, "", link.href);
+				buildUi();
+			}
+		});
+	});
+}
+Main();
