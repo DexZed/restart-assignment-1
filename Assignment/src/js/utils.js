@@ -1,3 +1,4 @@
+import Details from "./modal.js";
 function html(strings, ...values) {
 	const placeholders = /* @__PURE__ */ new Map();
 	const fullHtml = strings.reduce((acc, str, i) => {
@@ -20,4 +21,10 @@ function html(strings, ...values) {
 	});
 	return root;
 }
-export { html };
+function openModal(product) {
+	const modalContainer = document.querySelector("#modal-portal");
+	const detailsElement = Details(product).render();
+	modalContainer.replaceChildren(detailsElement);
+	detailsElement.showModal();
+}
+export { html, openModal };

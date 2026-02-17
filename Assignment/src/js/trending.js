@@ -1,4 +1,4 @@
-import { html } from "./utils.js";
+import { html, openModal } from "./utils.js";
 import { getProducts } from "./api/api.js";
 function Trend() {
 	return { render() {
@@ -19,7 +19,7 @@ function Trend() {
 }
 function ProductCard(product) {
 	return { render() {
-		return html`
+		const section = html`
         <div class="card bg-base-100 w-80 shadow-xs border border-base-200">
           <figure>
             <img
@@ -46,12 +46,16 @@ function ProductCard(product) {
             <p class="truncate font-semibold">${product.title}</p>
             <h2 class="card-title text-sm font-bold">$ ${product.price}</h2>
             <div class="flex justify-between mt-5">
-              <button class="btn btn-sm btn-outline">Details</button>
-              <button class="btn btn-sm btn-primary">Add</button>
+              <button class="btn btn-sm btn-outline view-details"><i class="fa-solid fa-circle-info"></i>Details</button>
+              <button class="btn btn-sm btn-primary"><i class="fa-solid fa-cart-arrow-down"></i>Add to Cart</button>
             </div>
           </div>
         </div>
       `;
+		section.querySelector(".view-details")?.addEventListener("click", () => {
+			openModal(product);
+		});
+		return section;
 	} };
 }
 export { ProductCard, Trend as default };
